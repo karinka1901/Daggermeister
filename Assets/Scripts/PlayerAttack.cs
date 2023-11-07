@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private PlayerMove playerMovement;
+    //[SerializeField] private PlayerControl playerControl;
     [SerializeField] private GameObject dagger;
     [SerializeField] public Transform shootingPoint;
     public bool activeDagger;
@@ -56,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
         dagger.transform.position = shootingPoint.position;
         dagger.GetComponent<Dagger>().SetDirection(Mathf.Sign(transform.localScale.x));
         activeDagger = true; 
-        StartCoroutine(Explode(0.3f));
+        StartCoroutine(Explode(0.35f));
     }
 
     private IEnumerator Explode(float delay)

@@ -11,6 +11,7 @@ public class Dagger : MonoBehaviour
     private float direction;
     private BoxCollider2D boxCollider;
     private Animator anim;
+    private Animator enemyAnim;
     public bool deactivated;
     [SerializeField]private PlayerAttack playerAttack;
 
@@ -19,7 +20,7 @@ public class Dagger : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        //playerAttack = GetComponent<PlayerAttack>();
+
     }
 
     private void Update()
@@ -37,9 +38,21 @@ public class Dagger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        hit = true;
-        boxCollider.enabled = false;
-        anim.SetTrigger("Explode");
+        if (collision.tag == "Enemy")
+        {
+            gameObject.SetActive(false);
+            anim.SetTrigger("Explode");
+        }
+        if (collision.tag == "Collectable" || collision.tag == "EnemyWall" || collision.tag == "Key")
+        {
+            hit = false;
+        }
+        else
+        {
+            hit = true;
+            boxCollider.enabled = false;
+            anim.SetTrigger("Explode");
+        }
     }
 
     public void SetDirection(float _direction)
