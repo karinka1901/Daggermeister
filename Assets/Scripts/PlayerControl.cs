@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
+using System.Runtime.CompilerServices;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -37,8 +38,9 @@ public class PlayerControl : MonoBehaviour
 
 
     [Header("Collectables")]
-    [SerializeField]public int collectedGems;
+    [SerializeField]public int collectedGems = 0;
     [SerializeField] public int collectedKey = 0;
+    private bool destroyed = false;
 
 
     private void Start()
@@ -62,6 +64,8 @@ public class PlayerControl : MonoBehaviour
        
 
         isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
+
+        
     }
 
  
@@ -104,7 +108,7 @@ public class PlayerControl : MonoBehaviour
 
             if (!isGrounded && jumpsLeft > 0 && !isSliding) // double jump
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce - 0.5f);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce - 0.3f);
                 jumpsLeft--;
                 Debug.Log("second jump");
             }
@@ -169,10 +173,11 @@ public class PlayerControl : MonoBehaviour
             Destroy(collision.gameObject);
             collectedGems += 1;
         }
+  
         if (collision.tag == "Key")
         {
             Destroy(collision.gameObject);
-            collectedKey += 1;
+            collectedKey = 1;
         }
 
             if (collision.tag == "Enemy" || collision.tag == "Spikes")
@@ -181,19 +186,6 @@ public class PlayerControl : MonoBehaviour
 
         }
 
-        //    if (collision.tag == "Door")
-        //{
-        //    if (collectedKey > 0)
-        //    {
-        //        //load new scene, door opens animation
-        //        doorAnim.SetTrigger("Open");
-        //        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("door is locked");
-        //    }
-        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)
