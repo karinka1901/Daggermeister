@@ -15,7 +15,13 @@ public class DoorControl : MonoBehaviour
 
     void Update()
     {
-
+        if(playerControl.collectedKey > 0) {
+            anim.SetBool("DoorOpen", true);
+        }
+        else
+        {
+            anim.SetBool("DoorOpen", false);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,12 +29,12 @@ public class DoorControl : MonoBehaviour
         {
             if (playerControl.collectedKey > 0)
             {
-                anim.SetBool("DoorOpen", true);
+                
                 StartCoroutine(NewScene(0.3f));
             }
             else
             {
-                anim.SetBool("DoorOpen", false);
+                Debug.Log("door is locked");
             }
         }
     }

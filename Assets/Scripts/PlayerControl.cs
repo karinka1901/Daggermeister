@@ -37,8 +37,8 @@ public class PlayerControl : MonoBehaviour
 
 
     [Header("Collectables")]
-    [SerializeField]private int collectedGems;
-    [SerializeField] public int collectedKey;
+    [SerializeField]public int collectedGems;
+    [SerializeField] public int collectedKey = 0;
 
 
     private void Start()
@@ -167,7 +167,6 @@ public class PlayerControl : MonoBehaviour
         if (collision.tag == "Collectable")
         {
             Destroy(collision.gameObject);
-
             collectedGems += 1;
         }
         if (collision.tag == "Key")
