@@ -12,6 +12,7 @@ TagManager:
   - Spikes
   - Door
   - Key
+  - CameraBounds
   layers:
   - Default
   - TransparentFX

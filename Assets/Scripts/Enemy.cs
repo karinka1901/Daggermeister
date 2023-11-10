@@ -35,7 +35,6 @@ public class Enemy : MonoBehaviour
         if (collision.tag == "Dagger")
         {
             enemySpeed = 0;
-            // StartCoroutine(EnemyDeath(0.1f));
             anim.SetBool("Dead", true);
             Debug.Log("enemys dead");
         }
@@ -60,6 +59,11 @@ public class Enemy : MonoBehaviour
     {
         Destroy(this.gameObject);
         Debug.Log("enemys dead");
+    }
+
+    private void DisableCollider()
+    {
+        boxCollider.enabled = false;
     }
 
 

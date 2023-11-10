@@ -40,7 +40,6 @@ public class PlayerControl : MonoBehaviour
     [Header("Collectables")]
     [SerializeField]public int collectedGems = 0;
     [SerializeField] public int collectedKey = 0;
-    private bool destroyed = false;
 
 
     private void Start()
@@ -60,8 +59,6 @@ public class PlayerControl : MonoBehaviour
         Animate();
         WallSlide();
         Walljump();
-
-       
 
         isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
 
