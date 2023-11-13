@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private float jumpForce = 3f;
     [SerializeField] private int jumpsLeft;
-    [SerializeField] private int maxJumps = 1;
+    [SerializeField] private int maxJumps =2;
 
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool isJumping;
@@ -34,7 +34,7 @@ public class PlayerControl : MonoBehaviour
     [Header("Wall Jump")]
     [SerializeField] Vector2 wallJumpForce;
     [SerializeField] private float wallJumpDuration;
-    private bool wallJumping;
+    [SerializeField] private bool wallJumping;
 
 
     [Header("Collectables")]
@@ -87,11 +87,11 @@ public class PlayerControl : MonoBehaviour
 
     private void Jump()
     {
-        if (isGrounded)
-        {
-            jumpsLeft = maxJumps;
-            isJumping = false;
-        }
+        //if (isGrounded)
+        //{
+        //    jumpsLeft = maxJumps;
+        //    isJumping = false;
+        //}
 
 
         if (Input.GetButtonDown("Jump"))
@@ -100,12 +100,13 @@ public class PlayerControl : MonoBehaviour
             if (isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                jumpsLeft--;
+                jumpsLeft --;
+                //isJumping = true;
             }
-
-            if (!isGrounded && jumpsLeft > 0 && !isSliding) // double jump
+            ///////////////////// double jump///////////////////////
+            if (!isGrounded && jumpsLeft > 0 && !isSliding)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce - 0.3f);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce - 0.3f); //- 0.3f
                 jumpsLeft--;
                 Debug.Log("second jump");
             }
@@ -124,8 +125,8 @@ public class PlayerControl : MonoBehaviour
         if (wallJumping)
         {
             rb.velocity = new Vector2(-horizontalInput * wallJumpForce.x, wallJumpForce.y);
-            jumpsLeft = maxJumps + 1;
-            Debug.Log("jumpig off the wale" + wallJumpForce.x);
+            jumpsLeft = maxJumps;
+            Debug.Log("jumpig off the wale" + jumpsLeft);
         }
     }
 
@@ -160,6 +161,8 @@ public class PlayerControl : MonoBehaviour
         if (collision.tag == "Ground")
         {
             isGrounded = true;
+            jumpsLeft = maxJumps;
+            isJumping = false;
 
 
             animator.SetTrigger("Landing");

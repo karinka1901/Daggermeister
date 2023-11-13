@@ -203,7 +203,7 @@ MonoBehaviour:
   speed: 1
   jumpForce: 2.8
   jumpsLeft: 0
-  maxJumps: 1
+  maxJumps: 2
   isGrounded: 0
   isJumping: 0
   wallLayer:
@@ -213,6 +213,7 @@ MonoBehaviour:
   wallSlidingSpeed: 0.5
   wallJumpForce: {x: 1.5, y: 1.7}
   wallJumpDuration: 0.1
+  wallJumping: 0
   collectedGems: 0
   collectedKey: 0
 --- !u!95 &3758960689311093904

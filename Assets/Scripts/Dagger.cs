@@ -41,6 +41,7 @@ public class Dagger : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             gameObject.SetActive(false);
+            playerAttack.activeDagger = false;
             anim.SetTrigger("Explode");
         }
         if (collision.tag == "Collectable" || collision.tag == "EnemyWall" || collision.tag == "Key")
