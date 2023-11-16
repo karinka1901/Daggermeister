@@ -40,13 +40,21 @@ public class PlayerControl : MonoBehaviour
     [Header("Collectables")]
     [SerializeField]public int collectedGems = 0;
     [SerializeField] public int collectedKey = 0;
+    [SerializeField]private bool surviveWater;
+
+    [Header("Underwater")]
+    [SerializeField] private float newDrag = 10.0f;
+    private float newGravity = 0.5f;
+
 
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
         jumpsLeft = maxJumps;
+        surviveWater = false;
 
     }
 
@@ -180,11 +188,27 @@ public class PlayerControl : MonoBehaviour
             collectedKey = 1;
         }
 
-            if (collision.tag == "Enemy" || collision.tag == "Spikes")
+        if (collision.tag == "Enemy" || collision.tag == "Spikes" && !surviveWater)//|| collision.tag == "Water")
         {
             animator.SetTrigger("dead");
-
+            speed = 0;
+            Debug.Log("hit spikes");
         }
+
+        if(collision.tag == "Boost")
+        {
+            surviveWater = true;
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.tag == "Water")
+        {
+            rb.drag = newDrag;
+            rb.gravityScale *= newGravity;
+            speed = 0.5f;
+            
+        }
+   
 
     }
 
@@ -193,6 +217,12 @@ public class PlayerControl : MonoBehaviour
         if (collision.tag == "Ground")
         {
             isGrounded = false;
+        }
+        if (collision.tag == "Water")
+        {
+            rb.drag = 0;
+            rb.gravityScale = 1;
+            speed = 1;
         }
     }
 

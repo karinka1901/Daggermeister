@@ -7,6 +7,9 @@ public class ItemsSpawner : MonoBehaviour
     public GameObject gemPrefab;
     public Transform[] gemPos;
 
+    public GameObject boostPrefab;
+    public Transform boostPos;
+
     public GameObject keyPrefab;
     public Transform keyPos;
 
@@ -14,10 +17,12 @@ public class ItemsSpawner : MonoBehaviour
 
 
 
+
     void Start()
     {
         SpawnGems();
         SpawnKey();
+        //SpawnBoost();
     }
 
     // Update is called once per frame
@@ -33,6 +38,14 @@ public class ItemsSpawner : MonoBehaviour
             GameObject spawnedGem = Instantiate(gemPrefab, gemPos[i].position, gemPos[i].rotation);
         }
     }
+
+    public void SpawnBoost()
+    {
+    
+        GameObject spawnedBoost = Instantiate(boostPrefab, boostPos.position, boostPos.rotation);
+    }
+
+
     public void SpawnKey()
     {
         GameObject spawnedKey = Instantiate(keyPrefab, keyPos.position, keyPos.rotation);

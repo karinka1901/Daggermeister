@@ -7,14 +7,18 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private BoxCollider2D boxCollider;
+    ItemsSpawner boost;
     [SerializeField] private float enemySpeed = 0.4f;
+    private Transform enemyDeadPos;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
-       
+        boost = FindObjectOfType<ItemsSpawner>();
+        //boost = GetComponent<ItemsSpawner>();
+
     }
 
     void Update()
@@ -37,6 +41,9 @@ public class Enemy : MonoBehaviour
             enemySpeed = 0;
             anim.SetBool("Dead", true);
             Debug.Log("enemys dead");
+            Debug.Log("boost spawned");
+            boost.SpawnBoost();
+
         }
         if (collision.tag == "Player")
         {
@@ -59,6 +66,7 @@ public class Enemy : MonoBehaviour
     {
         Destroy(this.gameObject);
         Debug.Log("enemys dead");
+   
     }
 
     private void DisableCollider()
