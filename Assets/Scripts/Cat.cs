@@ -7,12 +7,27 @@ public class Cat : MonoBehaviour
     Animator anim;
     SpawnCat catSpawner;
     public bool catHit;
-    
+    [SerializeField]private GameObject speechBubble;
+    private GameObject rewardItem;
+    [SerializeField] private PlayerControl playerControl;
+    private Rigidbody2D rbCat;
+    private float catSpeed = 0f;
+
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         catSpawner = FindObjectOfType<SpawnCat>();
+        rbCat =GetComponent<Rigidbody2D>();
+        rewardItem = GameObject.FindGameObjectWithTag("Key");
+        speechBubble.SetActive(false);
+        rewardItem.SetActive(false);
+
+    }
+
+    private void Update()
+    {
+        rbCat.velocity = new Vector2(catSpeed, rbCat.velocity.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,6 +35,19 @@ public class Cat : MonoBehaviour
         if (collision.tag == "Player")
         {
             anim.SetBool("Interact", true);
+
+            if (playerControl.collectedItem <= 0)
+            {
+                speechBubble.SetActive(true);
+                Debug.Log("no fish");
+            }
+            if (playerControl.collectedItem == 1)
+            {
+                speechBubble.SetActive(false);
+                rewardItem.SetActive(true );
+                anim.SetTrigger("Run");
+                
+            }
         }
 
         if (collision.tag == "Dagger")
@@ -38,6 +66,17 @@ public class Cat : MonoBehaviour
         if (collision.tag == "Player")
         {
             anim.SetBool("Interact", false);
+            speechBubble.SetActive(false);
         }
+    }
+
+    public void catStartRun()
+    {
+        catSpeed = 0.4f;
+        
+    }
+    public void catStopRun()
+    {
+        gameObject.SetActive(false);
     }
 }

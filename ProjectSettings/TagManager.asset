@@ -17,6 +17,8 @@ TagManager:
   - Cat
   - Water
   - Boost
+  - DeadlyLiquid
+  - Item
   layers:
   - Default
   - TransparentFX

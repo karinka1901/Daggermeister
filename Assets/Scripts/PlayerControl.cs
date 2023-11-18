@@ -10,13 +10,13 @@ public class PlayerControl : MonoBehaviour
     [Header("Components")]
     private Rigidbody2D rb;
     private Animator animator;
-   //[SerializeField]private Animator doorAnim;
 
+    [Header("Movement")]
     public bool isFacingRight = true;
     private float horizontalInput;
     [SerializeField] private float speed = 1f;
-    [Header("Jump")]
 
+    [Header("Jump")]
     [SerializeField] private float jumpForce = 3f;
     [SerializeField] private int jumpsLeft;
     [SerializeField] private int maxJumps =2;
@@ -38,13 +38,17 @@ public class PlayerControl : MonoBehaviour
 
 
     [Header("Collectables")]
-    [SerializeField]public int collectedGems = 0;
+    [SerializeField] public int collectedGems = 0;
     [SerializeField] public int collectedKey = 0;
-    [SerializeField]private bool surviveWater;
+    [SerializeField] public int collectedItem = 0;
+    public bool activeQuest;
+
 
     [Header("Underwater")]
-    [SerializeField] private float newDrag = 10.0f;
-    private float newGravity = 0.5f;
+    [SerializeField] private float newDrag = 10f;
+    [SerializeField]private float newGravity = 0.5f;
+    [SerializeField]private GameObject WaterHelmet;
+    private bool surviveWater;
 
 
 
@@ -52,10 +56,12 @@ public class PlayerControl : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        WaterHelmet.SetActive(false);
 
         jumpsLeft = maxJumps;
         surviveWater = false;
 
+        activeQuest = false;
     }
 
     private void Update()
@@ -70,11 +76,9 @@ public class PlayerControl : MonoBehaviour
 
         isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
 
-        
     }
 
  
-
     public void Flip()
     {
         if (isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)
@@ -95,12 +99,6 @@ public class PlayerControl : MonoBehaviour
 
     private void Jump()
     {
-        //if (isGrounded)
-        //{
-        //    jumpsLeft = maxJumps;
-        //    isJumping = false;
-        //}
-
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -188,16 +186,23 @@ public class PlayerControl : MonoBehaviour
             collectedKey = 1;
         }
 
-        if (collision.tag == "Enemy" || collision.tag == "Spikes" && !surviveWater)//|| collision.tag == "Water")
+        if (collision.tag == "Enemy" || collision.tag == "Spikes" || collision.tag == "DeadlyLiquid" &&  !surviveWater)
         {
             animator.SetTrigger("dead");
-            speed = 0;
+            //speed = 0;
             Debug.Log("hit spikes");
         }
 
         if(collision.tag == "Boost")
         {
             surviveWater = true;
+            WaterHelmet.SetActive(true);
+            Destroy(collision.gameObject);
+        }
+        if ((collision.tag =="Item"))
+        {
+            collectedItem = 1;
+            Debug.Log("collected item");
             Destroy(collision.gameObject);
         }
 
@@ -205,8 +210,13 @@ public class PlayerControl : MonoBehaviour
         {
             rb.drag = newDrag;
             rb.gravityScale *= newGravity;
-            speed = 0.5f;
-            
+            speed = 0.8f;
+            //WaterHelmet.SetActive(true);
+        }
+
+        if(collision.tag == "Cat")
+        {
+            activeQuest = true;
         }
    
 
@@ -272,6 +282,7 @@ public class PlayerControl : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
+        WaterHelmet.SetActive(false);
     }
 
 }

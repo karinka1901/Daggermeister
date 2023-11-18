@@ -40,9 +40,10 @@ public class Enemy : MonoBehaviour
         {
             enemySpeed = 0;
             anim.SetBool("Dead", true);
-            Debug.Log("enemys dead");
+           // Debug.Log("enemys dead");
             Debug.Log("boost spawned");
-            boost.SpawnBoost();
+            enemyDeadPos = transform;
+            
 
         }
         if (collision.tag == "Player")
@@ -62,11 +63,11 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void DestroyEnemy()
+    public void DestroyEnemy()
     {
         Destroy(this.gameObject);
         Debug.Log("enemys dead");
-   
+
     }
 
     private void DisableCollider()
@@ -74,6 +75,14 @@ public class Enemy : MonoBehaviour
         boxCollider.enabled = false;
     }
 
+    public void Boost()
+    {
+        boost.SpawnBoost(enemyDeadPos);
+    }
 
+    public void Item()
+    {
+        boost.SpawnItem(enemyDeadPos);
+    }
 
 }

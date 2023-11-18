@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class ItemsSpawner : MonoBehaviour
 {
+    [Header("GEMS")]
     public GameObject gemPrefab;
     public Transform[] gemPos;
 
+    [Header("BOOST")]
     public GameObject boostPrefab;
-    public Transform boostPos;
 
+    [Header("ITEMS")]
+    public GameObject itemPrefab;
+
+    [Header("KEY")]
     public GameObject keyPrefab;
     public Transform keyPos;
 
@@ -39,7 +44,7 @@ public class ItemsSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnBoost()
+    public void SpawnBoost(Transform boostPos)
     {
     
         GameObject spawnedBoost = Instantiate(boostPrefab, boostPos.position, boostPos.rotation);
@@ -50,5 +55,11 @@ public class ItemsSpawner : MonoBehaviour
     {
         GameObject spawnedKey = Instantiate(keyPrefab, keyPos.position, keyPos.rotation);
     }
-    //if player respawns, respawn all gems
+
+    public void SpawnItem(Transform itemPos)
+    {
+        GameObject spawnedItem = Instantiate(itemPrefab, itemPos.position, itemPos.rotation);
+    }
+
+
 }
