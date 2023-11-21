@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour
     public bool isFacingRight = true;
     private float horizontalInput;
     [SerializeField] private float speed = 1f;
+    public bool canMove;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 3f;
@@ -62,17 +63,22 @@ public class PlayerControl : MonoBehaviour
         surviveWater = false;
 
         activeQuest = false;
+        canMove = true;
     }
 
     private void Update()
     {
-        
-        Move();
-        Jump();
-        Flip();
+
+        if (canMove)
+        {
+            Move();
+            Jump();
+            Flip();
+            
+            WallSlide();
+            Walljump();
+        }
         Animate();
-        WallSlide();
-        Walljump();
 
         isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
 
@@ -186,11 +192,13 @@ public class PlayerControl : MonoBehaviour
             collectedKey = 1;
         }
 
-        if (collision.tag == "Enemy" || collision.tag == "Spikes" || collision.tag == "DeadlyLiquid" &&  !surviveWater)
+        if (collision.tag == "Enemy" || collision.tag == "Spikes" || (collision.tag == "DeadlyLiquid" &&  !surviveWater))
         {
+            canMove = false;
             animator.SetTrigger("dead");
-            //speed = 0;
-            Debug.Log("hit spikes");
+            
+
+            Debug.Log(collision.tag);
         }
 
         if(collision.tag == "Boost")

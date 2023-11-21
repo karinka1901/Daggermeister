@@ -17,13 +17,26 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
+    //public void SpawnEnemies()
+    //{
+    //    for (int i = 0; i < enemyPos.Length; i++)
+    //    {
+    //        //GameObject spawnedEnemy = Instantiate(enemyPrefabs[0], enemyPos[i].position, enemyPos[i].rotation);
+    //        int prefabIndex = i % 2; // 0 for even, 1 for odd
+    //        GameObject spawnedEnemy = Instantiate(enemyPrefabs[prefabIndex], enemyPos[i].position, enemyPos[i].rotation);
+    //    }
+    //}
     public void SpawnEnemies()
     {
+        int enemyPrefabIndex = 0; // Start with the first enemy prefab
+
         for (int i = 0; i < enemyPos.Length; i++)
         {
-            //GameObject spawnedEnemy = Instantiate(enemyPrefabs[0], enemyPos[i].position, enemyPos[i].rotation);
-            int prefabIndex = i % 2; // 0 for even, 1 for odd
-            GameObject spawnedEnemy = Instantiate(enemyPrefabs[prefabIndex], enemyPos[i].position, enemyPos[i].rotation);
+            GameObject spawnedEnemy = Instantiate(enemyPrefabs[enemyPrefabIndex], enemyPos[i].position, enemyPos[i].rotation);
+
+            // Move to the next enemy prefab index
+            enemyPrefabIndex = (enemyPrefabIndex + 1) % enemyPrefabs.Length;
         }
     }
+
 }

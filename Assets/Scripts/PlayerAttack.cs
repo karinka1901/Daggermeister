@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    //[SerializeField] private PlayerControl playerControl;
+    private PlayerControl player;
     [SerializeField] private GameObject dagger;
     [SerializeField] public Transform shootingPoint;
     public bool activeDagger;
@@ -15,34 +15,36 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         playerAnim = GetComponent<Animator>();
+        player = GetComponent<PlayerControl>();
         
     }
 
     private void Update()
     {
 
-       
-        if (Input.GetButtonDown("Fire1"))
-
+        if (player.canMove)
         {
-            if (isTeleporting)
+            if (Input.GetButtonDown("Fire1"))
+
             {
-                EndTeleportation();
+                if (isTeleporting)
+                {
+                    EndTeleportation();
+                }
+
+                if (activeDagger)
+                {
+                    TeleportToDagger();
+
+                }
+                else
+                {
+                    playerAnim.SetTrigger("Throw");
+
+
+                }
+
             }
-
-            if (activeDagger)
-            {
-                TeleportToDagger();
-
-            }
-            else
-            {
-                playerAnim.SetTrigger("Throw");
-
-
-            }
-
-            
         }
     }
 
