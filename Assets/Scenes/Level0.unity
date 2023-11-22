@@ -4384,7 +4384,7 @@ Transform:
   m_GameObject: {fileID: 1073050878}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53, y: 0.07, z: -10}
+  m_LocalPosition: {x: 0.8, y: 0.07, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4815,6 +4815,10 @@ PrefabInstance:
       propertyPath: daggerAnim
       value: 
       objectReference: {fileID: 326263770}
+    - target: {fileID: 8553935748540660778, guid: e2461c79d7bd6154581c564db5551f3d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34386,6 +34390,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4772683746809111134, guid: 04bfce1713ac78040a827bc5f5171225, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157277169498780059, guid: 04bfce1713ac78040a827bc5f5171225, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
