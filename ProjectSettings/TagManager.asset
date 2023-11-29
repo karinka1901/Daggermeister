@@ -19,6 +19,8 @@ TagManager:
   - Boost
   - DeadlyLiquid
   - Item
+  - Elevator
+  - Lever
   layers:
   - Default
   - TransparentFX

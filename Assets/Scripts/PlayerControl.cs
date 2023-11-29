@@ -69,7 +69,7 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
 
-        if (canMove)
+       // if (canMove)
         {
             Move();
             Jump();
@@ -83,8 +83,12 @@ public class PlayerControl : MonoBehaviour
         isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
 
     }
+    //private void FixedUpdate()
+    //{
+    //    Move();
+    //}
 
- 
+
     public void Flip()
     {
         if (isFacingRight && horizontalInput < 0f || !isFacingRight && horizontalInput > 0f)
@@ -196,8 +200,6 @@ public class PlayerControl : MonoBehaviour
         {
             canMove = false;
             animator.SetTrigger("dead");
-            
-
             Debug.Log(collision.tag);
         }
 

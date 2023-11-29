@@ -22,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
 
-        if (player.canMove)
+        //if (player.canMove)
         {
             if (Input.GetButtonDown("Fire1"))
 
@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
         dagger.transform.position = shootingPoint.position;
         dagger.GetComponent<Dagger>().SetDirection(Mathf.Sign(transform.localScale.x));
         activeDagger = true; 
-        StartCoroutine(Explode(0.35f));
+        StartCoroutine(Explode(0.4f));
     }
 
     private IEnumerator Explode(float delay)
