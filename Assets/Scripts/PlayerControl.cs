@@ -221,7 +221,7 @@ public class PlayerControl : MonoBehaviour
             rb.drag = newDrag;
             rb.gravityScale *= newGravity;
             speed = 0.8f;
-            //WaterHelmet.SetActive(true);
+
         }
 
         if(collision.tag == "Cat")

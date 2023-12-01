@@ -8,7 +8,8 @@ public class Enemy : MonoBehaviour
     private Animator anim;
     private BoxCollider2D boxCollider;
     ItemsSpawner boost;
-    [SerializeField] private float enemySpeed = 0.4f;
+    [SerializeField] private float enemySpeedX = 0.4f;
+    [SerializeField] private float enemySpeedY = 0f;
     private Transform enemyDeadPos;
 
     void Start()
@@ -23,7 +24,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector2(enemySpeed, rb.velocity.y);
+        rb.velocity = new Vector2(enemySpeedX, enemySpeedY);
+
         
     }
 
@@ -33,12 +35,16 @@ public class Enemy : MonoBehaviour
         {
             Vector3 localScale = transform.localScale;
             localScale.x *= -1;
+            //localScale.y *= -1; //for wall movement
             transform.localScale = localScale;
-            enemySpeed *= -1;
+            enemySpeedX *= -1;
+            enemySpeedY *= -1;  
+
         }
         if (collision.tag == "Dagger")
         {
-            enemySpeed = 0;
+            enemySpeedX = 0;
+            enemySpeedY = 0;
             anim.SetBool("Dead", true);
            // Debug.Log("enemys dead");
             Debug.Log("boost spawned");
@@ -48,7 +54,8 @@ public class Enemy : MonoBehaviour
         }
         if (collision.tag == "Player")
         {
-            enemySpeed = 0;
+            enemySpeedX = 0;
+            enemySpeedY = 0;
             anim.SetTrigger("Hit");
    
         }

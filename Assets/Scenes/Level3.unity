@@ -2332,7 +2332,7 @@ Transform:
   m_GameObject: {fileID: 175843816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.75, y: -0.196, z: 0.074177705}
+  m_LocalPosition: {x: 7.75, y: -0.084, z: 0.074177705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77988,6 +77988,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1866877686}
     m_Modifications:
+    - target: {fileID: 4858292573885272199, guid: abd22a2abdde30b4987c77010cb40070, type: 3}
+      propertyPath: enemySpeedX
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8114829053190585116, guid: abd22a2abdde30b4987c77010cb40070, type: 3}
       propertyPath: m_Name
       value: FishMid
@@ -78111,6 +78115,10 @@ PrefabInstance:
     - target: {fileID: 848165173976136990, guid: b38b6fd2a1bc8bf4b8c927b38b609949, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628340374498349365, guid: b38b6fd2a1bc8bf4b8c927b38b609949, type: 3}
+      propertyPath: enemySpeedX
+      value: -0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

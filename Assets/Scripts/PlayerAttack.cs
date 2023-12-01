@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
         dagger.transform.position = shootingPoint.position;
         dagger.GetComponent<Dagger>().SetDirection(Mathf.Sign(transform.localScale.x));
         activeDagger = true; 
-        StartCoroutine(Explode(0.4f));
+        StartCoroutine(Explode(0.46f));
     }
 
     private IEnumerator Explode(float delay)

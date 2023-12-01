@@ -3,8 +3,8 @@ using UnityEngine;
 public class Elevator: MonoBehaviour
 {
     public Vector3 endPos;
-    public float speed = 0.5f; 
-    private Vector3 startPos = Vector3.zero; 
+    public float speed = 0.5f;
+    public Vector3 startPos;
     private bool movingToEnd = true;
     public bool elevatorOn;
 
