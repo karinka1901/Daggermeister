@@ -44,7 +44,7 @@ public class Cat : MonoBehaviour
             if (playerControl.collectedItem == 1)
             {
                 speechBubble.SetActive(false);
-                rewardItem.SetActive(true );
+                rewardItem.SetActive(true);
                 anim.SetTrigger("Run");
                 
             }

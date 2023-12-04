@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 public class PlayerControl : MonoBehaviour
 {
     [Header("Components")]
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator animator;
 
     [Header("Movement")]
@@ -40,7 +40,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Collectables")]
     [SerializeField] public int collectedGems = 0;
-    [SerializeField] public int collectedKey = 0;
+    //[SerializeField] public int collectedKey = 0;
     [SerializeField] public int collectedItem = 0;
     public bool activeQuest;
 
@@ -58,6 +58,7 @@ public class PlayerControl : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         WaterHelmet.SetActive(false);
+        //collectedGems = 0;
 
         jumpsLeft = maxJumps;
         surviveWater = false;
@@ -171,6 +172,11 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    //private void addGem()
+    //{
+    //    collectedGems += 1;
+    //}
+
     //GroundChecker
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -184,17 +190,20 @@ public class PlayerControl : MonoBehaviour
             animator.SetTrigger("Landing");
             animator.SetBool("isFalling", false);
         }
-        if (collision.tag == "Collectable")
-        {
-            Destroy(collision.gameObject);
-            collectedGems += 1;
-        }
+        //if (collision.tag == "Collectable")
+        //{
+            
+        //    Debug.Log("collected gem: " + collectedGems);
+        //    Destroy(collision.gameObject);
+        //    addGem();
+
+        //}
   
-        if (collision.tag == "Key")
-        {
-            Destroy(collision.gameObject);
-            collectedKey = 1;
-        }
+        //if (collision.tag == "Key")
+        //{
+        //    Destroy(collision.gameObject);
+        //    collectedKey = 1;
+        //}
 
         if (collision.tag == "Enemy" || collision.tag == "Spikes" || (collision.tag == "DeadlyLiquid" &&  !surviveWater))
         {

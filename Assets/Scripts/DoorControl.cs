@@ -15,7 +15,7 @@ public class DoorControl : MonoBehaviour
 
     void Update()
     {
-        if(playerControl.collectedKey > 0) {
+        if(playerControl.collectedGems == 6) {
             anim.SetBool("DoorOpen", true);
         }
         else
@@ -27,10 +27,11 @@ public class DoorControl : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (playerControl.collectedKey > 0)
+            if (playerControl.collectedGems == 6)
             {
                 
                 StartCoroutine(NewScene(0.3f));
+                //Invoke("NewScene", 0.3f);
             }
             else
             {
@@ -45,5 +46,9 @@ public class DoorControl : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
+    //private NewScene()
+    //{
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    //}
 
 }

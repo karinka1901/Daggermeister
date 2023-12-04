@@ -14,11 +14,11 @@ public class ItemsSpawner : MonoBehaviour
     [Header("ITEMS")]
     public GameObject itemPrefab;
 
-    [Header("KEY")]
-    public GameObject keyPrefab;
-    public Transform keyPos;
+    //[Header("KEY")]
+    //public GameObject keyPrefab;
+    //public Transform keyPos;
 
-    private int gemsNum = 5;
+    private int gemsNum = 6;
 
 
 
@@ -26,7 +26,7 @@ public class ItemsSpawner : MonoBehaviour
     void Start()
     {
         SpawnGems();
-        SpawnKey();
+       // SpawnKey();
         //SpawnBoost();
     }
 
@@ -51,10 +51,10 @@ public class ItemsSpawner : MonoBehaviour
     }
 
 
-    public void SpawnKey()
-    {
-        GameObject spawnedKey = Instantiate(keyPrefab, keyPos.position, keyPos.rotation);
-    }
+    //public void SpawnKey()
+    //{
+    //    GameObject spawnedKey = Instantiate(keyPrefab, keyPos.position, keyPos.rotation);
+    //}
 
     public void SpawnItem(Transform itemPos)
     {

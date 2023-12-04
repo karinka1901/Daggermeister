@@ -23,8 +23,8 @@ public class InGameUI : MonoBehaviour
     void Update()
     {
 
-        gemsText.text = playerControl.collectedGems.ToString() + "/5";
-        keyText.text = playerControl.collectedKey.ToString() + "/1";
+        gemsText.text = playerControl.collectedGems.ToString() + "/6";
+        //keyText.text = playerControl.collectedKey.ToString() + "/1";
         itemText.text = playerControl.collectedItem.ToString() + "/1";
 
         currentTime += Time.deltaTime;
