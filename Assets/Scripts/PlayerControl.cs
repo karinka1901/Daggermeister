@@ -43,7 +43,7 @@ public class PlayerControl : MonoBehaviour
     //[SerializeField] public int collectedKey = 0;
     [SerializeField] public int collectedItem = 0;
     public bool activeQuest;
-    private bool antiSpikeOn;
+    [SerializeField]private bool antiSpikeOn;
 
 
     [Header("Underwater")]
