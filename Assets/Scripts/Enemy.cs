@@ -18,15 +18,12 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         boost = FindObjectOfType<ItemsSpawner>();
-        //boost = GetComponent<ItemsSpawner>();
 
     }
 
     void Update()
     {
-        rb.velocity = new Vector2(enemySpeedX, enemySpeedY);
-
-        
+        rb.velocity = new Vector2(enemySpeedX, enemySpeedY);   
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -62,13 +59,7 @@ public class Enemy : MonoBehaviour
 
 
     }
-    //private IEnumerator EnemyDeath(float delay)
-    //{
-        
-    //    anim.SetBool("Dead", true);
-    //    yield return new WaitForSeconds(delay);
 
-    //}
 
     public void DestroyEnemy()
     {

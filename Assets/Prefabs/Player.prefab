@@ -200,8 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b71ab70195523c47a497b71b60924cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  godMode: 0
+  rb: {fileID: 0}
   isFacingRight: 1
   speed: 1
+  canMove: 0
   jumpForce: 2.8
   jumpsLeft: 0
   maxJumps: 2
@@ -216,9 +219,9 @@ MonoBehaviour:
   wallJumpDuration: 0.1
   wallJumping: 0
   collectedGems: 0
-  collectedKey: 0
   collectedItem: 0
   activeQuest: 0
+  antiSpikeOn: 0
   newDrag: 10
   newGravity: 0.5
   WaterHelmet: {fileID: 8553935748540660778}

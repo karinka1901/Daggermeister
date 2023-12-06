@@ -2,29 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
-    [SerializeField] public TextMeshProUGUI gemsText;
-    [SerializeField] public TextMeshProUGUI timerText;
-    [SerializeField] public TextMeshProUGUI keyText;
-    [SerializeField] public TextMeshProUGUI itemText;
+    [SerializeField] public Text gemsText;
+    [SerializeField] public Text timerText;
+    [SerializeField] public Text godModeText;
+
+    [SerializeField] public Text itemText;
+    [SerializeField] private GameObject GodMode;
 
     [SerializeField] private PlayerControl playerControl;
     [SerializeField] private GameObject collectedItemsDisplay;
+
     private float currentTime = 0f;
 
     void Start()
     {
         collectedItemsDisplay.SetActive(false);
+        GodMode.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        if (playerControl.godMode)
+        {
+            GodMode.SetActive(true);
+            godModeText.text = "NOOB MODE: ON";
+            
+        }
+        else
+        {
+            godModeText.text = "NOOB MODE: OFF";
+            Invoke("DisableMode", 0.5f);
+        }
+
         gemsText.text = playerControl.collectedGems.ToString() + "/6";
-        //keyText.text = playerControl.collectedKey.ToString() + "/1";
         itemText.text = playerControl.collectedItem.ToString() + "/1";
 
         currentTime += Time.deltaTime;
@@ -40,5 +56,10 @@ public class InGameUI : MonoBehaviour
         {
             collectedItemsDisplay.SetActive(true);
         }
+    }
+
+    private void DisableMode()
+    {
+        GodMode.SetActive(false);
     }
 }

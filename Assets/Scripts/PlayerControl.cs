@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 
 public class PlayerControl : MonoBehaviour
 {
+    public bool godMode;
+    
     [Header("Components")]
     public Rigidbody2D rb;
     private Animator animator;
@@ -15,7 +17,8 @@ public class PlayerControl : MonoBehaviour
     public bool isFacingRight = true;
     private float horizontalInput;
     [SerializeField] private float speed = 1f;
-    public bool canMove;
+    private bool isDead;
+
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 3f;
@@ -40,7 +43,6 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Collectables")]
     [SerializeField] public int collectedGems = 0;
-    //[SerializeField] public int collectedKey = 0;
     [SerializeField] public int collectedItem = 0;
     public bool activeQuest;
     [SerializeField]private bool antiSpikeOn;
@@ -50,7 +52,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float newDrag = 10f;
     [SerializeField]private float newGravity = 0.5f;
     [SerializeField]private GameObject WaterHelmet;
-    private bool surviveWater;
+    [SerializeField]private bool surviveWater;
 
 
 
@@ -59,38 +61,56 @@ public class PlayerControl : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         WaterHelmet.SetActive(false);
-        //collectedGems = 0;
+
+        isDead = false;
+
 
         jumpsLeft = maxJumps;
         surviveWater = false;
 
         activeQuest = false;
-        canMove = true;
+        
 
         antiSpikeOn = false;
+        
     }
 
     private void Update()
     {
+        /////////////////CHEATS//////////////////////////////
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            godMode = !godMode;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            collectedGems = 6;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            WaterHelmet.SetActive(!WaterHelmet.activeSelf);
+            surviveWater = !surviveWater;
+        }
+       
+        Animate();
 
-       // if (canMove)
+        if (!isDead)
         {
             Move();
             Jump();
             Flip();
-            
+
             WallSlide();
             Walljump();
-        }
-        Animate();
 
-        isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
+            isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
+        }
+        else
+        {
+            Invoke("PlayerDeath", 0.5f);
+        }
 
     }
-    //private void FixedUpdate()
-    //{
-    //    Move();
-    //}
 
 
     public void Flip()
@@ -175,12 +195,6 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    //private void addGem()
-    //{
-    //    collectedGems += 1;
-    //}
-
-    //GroundChecker
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Ground")
@@ -193,28 +207,17 @@ public class PlayerControl : MonoBehaviour
             animator.SetTrigger("Landing");
             animator.SetBool("isFalling", false);
         }
-        //if (collision.tag == "Collectable")
-        //{
-            
-        //    Debug.Log("collected gem: " + collectedGems);
-        //    Destroy(collision.gameObject);
-        //    addGem();
-
-        //}
-  
-        //if (collision.tag == "Key")
-        //{
-        //    Destroy(collision.gameObject);
-        //    collectedKey = 1;
-        //}
 
         if (collision.tag == "Enemy" || (collision.tag == "Spikes" && !antiSpikeOn) || (collision.tag == "DeadlyLiquid" &&  !surviveWater))
         {
-            canMove = false;
-            animator.SetTrigger("dead");
-            Debug.Log(collision.tag);
+            if (!godMode)
+            {
+                animator.SetTrigger("dead");
+                Debug.Log(collision.tag);
+                isDead = true;
+            }
         }
-         //if(collision.tag == "Spikes" && antiSpikeOn)
+ 
 
         if (collision.tag == "Water")
         {
@@ -312,9 +315,15 @@ public class PlayerControl : MonoBehaviour
 
     private void PlayerDeath()
     {
+        //isDead = true;
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
         WaterHelmet.SetActive(false);
+    }
+
+    public void Dead()
+    {
+        isDead = true;
     }
 
 }

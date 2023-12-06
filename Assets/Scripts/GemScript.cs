@@ -21,6 +21,8 @@ public class GemScript : MonoBehaviour
             Destroy(this.gameObject);
 
         }
+
+
     }
     
 }

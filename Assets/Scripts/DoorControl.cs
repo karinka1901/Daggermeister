@@ -15,6 +15,8 @@ public class DoorControl : MonoBehaviour
 
     void Update()
     {
+
+        
         if(playerControl.collectedGems == 6) {
             anim.SetBool("DoorOpen", true);
         }
