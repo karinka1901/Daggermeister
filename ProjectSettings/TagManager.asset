@@ -21,6 +21,9 @@ TagManager:
   - Item
   - Elevator
   - Lever
+  - AntiSpike
+  - EnemyArea
+  - ShieldTrigger
   layers:
   - Default
   - TransparentFX

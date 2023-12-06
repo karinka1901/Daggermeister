@@ -8,7 +8,7 @@ public class Elevator: MonoBehaviour
     private bool movingToEnd = true;
     public bool elevatorOn;
     private PlayerControl player;
-    private bool playerOnPlatform;
+    //private bool playerOnPlatform;
     private Transform playerPlaceholder;
 
     void Start()
@@ -56,7 +56,7 @@ public class Elevator: MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            playerOnPlatform = true;
+            //playerOnPlatform = true;
             playerPlaceholder.position = collision.transform.position;
             playerPlaceholder.gameObject.SetActive(true);
             collision.transform.parent = playerPlaceholder;
@@ -67,7 +67,7 @@ public class Elevator: MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            playerOnPlatform = false;
+            //playerOnPlatform = false;
             collision.transform.parent = null;
             playerPlaceholder.gameObject.SetActive(false);
         }

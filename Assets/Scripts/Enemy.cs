@@ -62,13 +62,13 @@ public class Enemy : MonoBehaviour
 
 
     }
-    private IEnumerator EnemyDeath(float delay)
-    {
+    //private IEnumerator EnemyDeath(float delay)
+    //{
         
-        anim.SetBool("Dead", true);
-        yield return new WaitForSeconds(delay);
+    //    anim.SetBool("Dead", true);
+    //    yield return new WaitForSeconds(delay);
 
-    }
+    //}
 
     public void DestroyEnemy()
     {

@@ -43,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     //[SerializeField] public int collectedKey = 0;
     [SerializeField] public int collectedItem = 0;
     public bool activeQuest;
+    private bool antiSpikeOn;
 
 
     [Header("Underwater")]
@@ -65,6 +66,8 @@ public class PlayerControl : MonoBehaviour
 
         activeQuest = false;
         canMove = true;
+
+        antiSpikeOn = false;
     }
 
     private void Update()
@@ -205,25 +208,13 @@ public class PlayerControl : MonoBehaviour
         //    collectedKey = 1;
         //}
 
-        if (collision.tag == "Enemy" || collision.tag == "Spikes" || (collision.tag == "DeadlyLiquid" &&  !surviveWater))
+        if (collision.tag == "Enemy" || (collision.tag == "Spikes" && !antiSpikeOn) || (collision.tag == "DeadlyLiquid" &&  !surviveWater))
         {
             canMove = false;
             animator.SetTrigger("dead");
             Debug.Log(collision.tag);
         }
-
-        if(collision.tag == "Boost")
-        {
-            surviveWater = true;
-            WaterHelmet.SetActive(true);
-            Destroy(collision.gameObject);
-        }
-        if ((collision.tag =="Item"))
-        {
-            collectedItem = 1;
-            Debug.Log("collected item");
-            Destroy(collision.gameObject);
-        }
+         //if(collision.tag == "Spikes" && antiSpikeOn)
 
         if (collision.tag == "Water")
         {
@@ -237,7 +228,29 @@ public class PlayerControl : MonoBehaviour
         {
             activeQuest = true;
         }
-   
+
+        //Collectibles 
+
+        if (collision.tag == "Boost")
+        {
+            surviveWater = true;
+            WaterHelmet.SetActive(true);
+            Destroy(collision.gameObject);
+        }
+        if ((collision.tag == "Item"))
+        {
+            collectedItem = 1;
+            Debug.Log("collected item");
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.tag == "AntiSpike")
+        {
+            antiSpikeOn = true;
+            Debug.Log(antiSpikeOn);
+            Destroy(collision.gameObject);
+        }
+
 
     }
 
