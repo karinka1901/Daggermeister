@@ -45702,7 +45702,7 @@ GameObject:
   - component: {fileID: 468774379}
   m_Layer: 0
   m_Name: PlatformCollider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51551,7 +51551,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.729596, y: -0.15145361}
+  m_Offset: {x: 3.729596, y: -0.10196008}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -51562,7 +51562,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45866823, y: 0.104135364}
+  m_Size: {x: 0.45866823, y: 0.07113969}
   m_EdgeRadius: 0
 --- !u!61 &944012112
 BoxCollider2D:
@@ -51686,7 +51686,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.3727665, y: 0.34847566}
+  m_Offset: {x: 5.3727665, y: 0.35507482}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -51697,7 +51697,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5318985, y: 0.0741989}
+  m_Size: {x: 0.5318985, y: 0.08739719}
   m_EdgeRadius: 0
 --- !u!1 &953140866
 GameObject:
@@ -68608,10 +68608,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'LevelUI  '
       objectReference: {fileID: 0}
+    - target: {fileID: 4524291174601191494, guid: 43fd7be6a7b719f41bc245e6b9b8741b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7730205501579390047, guid: 43fd7be6a7b719f41bc245e6b9b8741b, type: 3}
       propertyPath: playerControl
       value: 
       objectReference: {fileID: 221348086}
+    - target: {fileID: 8881280890481779580, guid: 43fd7be6a7b719f41bc245e6b9b8741b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -73064,7 +73072,7 @@ GameObject:
   - component: {fileID: 1483596350}
   m_Layer: 0
   m_Name: PlatformCollider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73213,7 +73221,7 @@ GameObject:
   - component: {fileID: 1562430626}
   m_Layer: 0
   m_Name: PlatformCollider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -9,7 +9,7 @@ public class GemScript : MonoBehaviour
     void Start()
     {
         playerControl = FindObjectOfType<PlayerControl>();
-        playerControl.collectedGems = 0;
+       // playerControl.collectedGems = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

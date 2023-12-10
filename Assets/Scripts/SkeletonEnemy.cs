@@ -44,23 +44,29 @@ public class SkeletonEnemy : MonoBehaviour
 
     }
 
-  
+
     void Update()
     {
-   
-        FollowandAttack();
-
-        //skeletonRb.velocity = new Vector2(skeletonSpeed, 0);
-        
-
-        if (shieldLife > 0)
+        if (!player.pauseOn)
         {
-            isShielded = true;
+            FollowandAttack();
+
+            //skeletonRb.velocity = new Vector2(skeletonSpeed, 0);
+
+
+            if (shieldLife > 0)
+            {
+                isShielded = true;
+            }
+            if (shieldLife <= 0)
+            {
+                isShielded = false;
+                Shield.SetActive(false);
+            }
         }
-        if (shieldLife <= 0)
+        else
         {
-            isShielded = false;
-            Shield.SetActive(false);
+            skeletonRb.velocity = new Vector2(0, 0);
         }
     }
 
@@ -99,6 +105,7 @@ public class SkeletonEnemy : MonoBehaviour
                 skeletonAnim.SetTrigger("dead");
                 skeletonSpeed = 0;
                 deadSkeletonPos = transform;
+                player.activated = true;
             }
 
         }

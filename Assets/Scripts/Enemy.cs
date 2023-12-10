@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float enemySpeedX = 0.4f;
     [SerializeField] private float enemySpeedY = 0f;
     private Transform enemyDeadPos;
+    private PlayerControl playerControl;
 
     void Start()
     {
@@ -18,12 +19,20 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         boost = FindObjectOfType<ItemsSpawner>();
+        playerControl = FindObjectOfType<PlayerControl>();
 
     }
 
     void Update()
     {
-        rb.velocity = new Vector2(enemySpeedX, enemySpeedY);   
+        if (!playerControl.pauseOn)
+        {
+            rb.velocity = new Vector2(enemySpeedX, enemySpeedY);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

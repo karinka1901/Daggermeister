@@ -7,11 +7,21 @@ using System.Runtime.CompilerServices;
 
 public class PlayerControl : MonoBehaviour
 {
+    private GameManager gameManager;
+    //public int playerDeathCounter = 0;
     public bool godMode;
+    public bool activated;
+    public bool pauseOn;
+    public ParticleSystem skull;
+    public int unlockedLevels = 0;
+
+
+
     
     [Header("Components")]
     public Rigidbody2D rb;
     private Animator animator;
+    private CapsuleCollider2D playerBox;
 
     [Header("Movement")]
     public bool isFacingRight = true;
@@ -58,11 +68,14 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
+        playerBox = GetComponent<CapsuleCollider2D>();
+        gameManager = FindObjectOfType<GameManager>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         WaterHelmet.SetActive(false);
 
         isDead = false;
+
 
 
         jumpsLeft = maxJumps;
@@ -72,43 +85,59 @@ public class PlayerControl : MonoBehaviour
         
 
         antiSpikeOn = false;
+        collectedGems = 0;
+        
+
+        gameManager.pauseOn = false;
         
     }
 
     private void Update()
     {
-        /////////////////CHEATS//////////////////////////////
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        if (!gameManager.pauseOn)
         {
-            godMode = !godMode;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            collectedGems = 6;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            WaterHelmet.SetActive(!WaterHelmet.activeSelf);
-            surviveWater = !surviveWater;
-        }
-       
-        Animate();
 
-        if (!isDead)
-        {
-            Move();
-            Jump();
-            Flip();
+            /////////////////CHEATS//////////////////////////////
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                godMode = !godMode;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                collectedGems = 6;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                WaterHelmet.SetActive(!WaterHelmet.activeSelf);
+                surviveWater = !surviveWater;
+            }
 
-            WallSlide();
-            Walljump();
+            Animate();
 
-            isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
+            if (!isDead)
+            {
+                Move();
+                Jump();
+                Flip();
+
+                WallSlide();
+                Walljump();
+
+                isWallTouching = Physics2D.OverlapBox(wallCheck.position, new Vector2(0.08f, 0.37f), 0, wallLayer);
+            }
+            else
+            {
+                
+              // Invoke("PlayerDeath", 1f);
+            }
         }
+
         else
         {
-            Invoke("PlayerDeath", 0.5f);
+            Debug.Log("InMenu");
         }
+        
+
 
     }
 
@@ -212,9 +241,13 @@ public class PlayerControl : MonoBehaviour
         {
             if (!godMode)
             {
+               
                 animator.SetTrigger("dead");
-                Debug.Log(collision.tag);
                 isDead = true;
+                
+                
+                Debug.Log(collision.tag);
+                
             }
         }
  
@@ -315,10 +348,28 @@ public class PlayerControl : MonoBehaviour
 
     private void PlayerDeath()
     {
-        //isDead = true;
+        playerBox.enabled = false;
+        rb.bodyType = RigidbodyType2D.Static;
+        gameManager.AddDeathCount();
+        gameManager.AddDeathCountUI();
+        
+        WaterHelmet.SetActive(false);
+        Debug.Log(gameManager.getDeathCount());
+        Invoke("ReloadAfterDeath", 0.5f);
+        
+    }
+    private void ReloadAfterDeath()
+    {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
-        WaterHelmet.SetActive(false);
+    }
+
+
+
+
+    public void DeathScreen()
+    {
+        skull.Play();
     }
 
     public void Dead()

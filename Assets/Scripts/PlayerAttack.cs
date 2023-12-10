@@ -22,29 +22,35 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
 
-        //if (player.canMove)
+        if (!player.pauseOn)
         {
-            if (Input.GetButtonDown("Fire1"))
-
             {
-                if (isTeleporting)
+                if (Input.GetButtonDown("Fire1"))
+
                 {
-                    EndTeleportation();
+                    if (isTeleporting)
+                    {
+                        EndTeleportation();
+                    }
+
+                    if (activeDagger)
+                    {
+                        TeleportToDagger();
+
+                    }
+                    else
+                    {
+                        playerAnim.SetTrigger("Throw");
+
+
+                    }
+
                 }
-
-                if (activeDagger)
-                {
-                    TeleportToDagger();
-
-                }
-                else
-                {
-                    playerAnim.SetTrigger("Throw");
-
-
-                }
-
             }
+        }
+        else
+        {
+            Debug.Log("CantAttack");
         }
     }
 
