@@ -1,13 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+   // AudioManager music;
+   // SFXcontrol sfx;
+   // public GameObject settings;
+
     public GameObject pauseMenu;
+   // public GameObject pause;
+    private GameObject settings;
     private bool mainMenuOn;
     public bool pauseOn;
 
@@ -30,12 +35,24 @@ public class GameManager : MonoBehaviour
     public static bool nextLevel;
 
 
-
+    private void Awake()
+    {
+       // SceneManager.LoadScene("StartingScene");
+        Debug.Log(SceneManager.GetActiveScene().name);
+       // DontDestroyOnLoad(settings);
+    }
 
     void Start()
     {
-        pauseMenu.SetActive(false);
 
+        pauseMenu.SetActive(false);
+        mainMenuOn = true;
+        ////////////////////MUSIC CONTROL//////////////////////////////////////////////////////////////////////////////////////////
+
+        //  sfx = GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>(); 
+        settings = GameObject.FindGameObjectWithTag("SettingsMenu");
+
+        /////////////////////////////LEVEL SELECTION MENU////////////////////////////////////////////////////////
         if (SceneManager.GetActiveScene().name == "LevelSelect")
         {
             CheckUnlockedLevels();
@@ -55,7 +72,7 @@ public class GameManager : MonoBehaviour
             secretTimer += Time.deltaTime;
         }
 
-        if (SceneManager.GetActiveScene().name == "Start")
+        if (SceneManager.GetActiveScene().name == "Start" || SceneManager.GetActiveScene().name == "LevelSelect")
         {
             mainMenuOn = true;
         }
@@ -65,15 +82,28 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !mainMenuOn)
+        if (Input.GetKeyDown(KeyCode.Tab) && !mainMenuOn)
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
             pauseOn = !pauseOn;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "LevelSelect")
+        if (Input.GetKeyDown(KeyCode.Tab) && SceneManager.GetActiveScene().name == "LevelSelect" || Input.GetKeyDown(KeyCode.Tab) && SceneManager.GetActiveScene().name == "SettingsMenu")
         {
             SceneManager.LoadScene("Start");
+         
+        }
+
+        if ((Input.anyKeyDown) && SceneManager.GetActiveScene().name == "StartingScene")
+        {
+            SceneManager.LoadScene("Start");
+
+        }
+
+        if ((Input.anyKeyDown) && SceneManager.GetActiveScene().name == "Level8")
+        {
+            SceneManager.LoadScene("Start");
+
         }
     }
 
@@ -121,8 +151,8 @@ public class GameManager : MonoBehaviour
     
         for (int i = 0; i < levelsCompleted; i++)
         {
-            deathCountText[i].text = playerDeathPerLvl[i].ToString();
-            Debug.Log(playerDeathPerLvl[i]);
+            deathCountText[i].text = playerDeathPerLvl[i+1].ToString();
+            Debug.Log(playerDeathPerLvl[i+1]);
 
             
         }
@@ -148,6 +178,8 @@ public class GameManager : MonoBehaviour
             
             lockedLevelPictures[i+1].SetActive(false);
             levelButtons[i+1].SetActive(true);
+
+            
 
         }
     }
@@ -198,32 +230,54 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("LevelSelect");
         mainMenuOn = false;
+    //    music.PlaySFX(music.buttonPress);
     }
 
     public void Resume()
     {
+    //    music.PlaySFX(music.buttonPress);
         pauseMenu.SetActive(false);
         pauseOn = false;
         Debug.Log("Resume");
     }
 
+    public void VolumePauseMenu()
+    {
+        //    music.PlaySFX(music.buttonPress);
+       // pauseMenu.SetActive(false);
+        pauseOn =false;
+        pauseMenu.SetActive(false);
+        SceneManager.LoadScene(10);
+    }
+
     public void MainMenu()
     {
+      //  music.PlaySFX(music.buttonPress);
         SceneManager.LoadScene("Start");
         mainMenuOn = true;
     }
     public void LevelSelect()
     {
+      //  music.PlaySFX(music.buttonPress);
         SceneManager.LoadScene("LevelSelect");
         mainMenuOn = true;
     }
 
 
+    public void LockedButtons()
+    {
+     //   music.PlaySFX(music.lockedLvl);
+    }
+
     public void LoadLevel(int lvl)
     {
         if (lvl < SceneManager.sceneCountInBuildSettings)
         {
-                SceneManager.LoadScene(lvl);
+           // music.PlaySFX(music.buttonPress);
+            SceneManager.LoadScene(lvl+1);
+         
+
+            Debug.Log(mainMenuOn);
             
         }
     }

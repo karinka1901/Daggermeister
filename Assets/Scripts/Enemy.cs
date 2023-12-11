@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float enemySpeedY = 0f;
     private Transform enemyDeadPos;
     private PlayerControl playerControl;
+    SFXcontrol audioManager;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         boost = FindObjectOfType<ItemsSpawner>();
         playerControl = FindObjectOfType<PlayerControl>();
+        audioManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
 
     }
 
@@ -52,7 +54,8 @@ public class Enemy : MonoBehaviour
             enemySpeedX = 0;
             enemySpeedY = 0;
             anim.SetBool("Dead", true);
-           // Debug.Log("enemys dead");
+           audioManager.PlaySFX(audioManager.enemyDeath);//////////////////////////////////SFX//////////
+                                                           // Debug.Log("enemys dead");
             Debug.Log("boost spawned");
             enemyDeadPos = transform;
             

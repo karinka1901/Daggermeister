@@ -5,13 +5,18 @@ using UnityEngine;
 public class Cat : MonoBehaviour
 {
     Animator anim;
+    
     SpawnCat catSpawner;
     public bool catHit;
-    [SerializeField]private GameObject speechBubble;
+    [SerializeField]public GameObject speechBubble;
     private GameObject rewardItem;
     [SerializeField] private PlayerControl playerControl;
     private Rigidbody2D rbCat;
     private float catSpeed = 0f;
+    SFXcontrol audioManager;
+
+    private Transform deadCatPos;
+    public GameObject enemyPrefab;
 
 
     private void Start()
@@ -22,12 +27,14 @@ public class Cat : MonoBehaviour
         rewardItem = GameObject.FindGameObjectWithTag("Key");
         speechBubble.SetActive(false);
         rewardItem.SetActive(false);
+        audioManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
 
     }
 
     private void Update()
     {
         rbCat.velocity = new Vector2(catSpeed, rbCat.velocity.y);
+        //speechBubble.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,8 +42,9 @@ public class Cat : MonoBehaviour
         if (collision.tag == "Player")
         {
             anim.SetBool("Interact", true);
+            audioManager.PlaySFX(audioManager.cat);//////////////////////////////////SFX//////////
 
-            if (playerControl.collectedItem <= 0)
+            if (playerControl.collectedItem == 0)
             {
                 speechBubble.SetActive(true);
                 Debug.Log("no fish");
@@ -52,8 +60,10 @@ public class Cat : MonoBehaviour
 
         if (collision.tag == "Dagger")
         {
+           playerControl.isDead = true;
+            deadCatPos = transform;
             Destroy(this.gameObject);
-            GameObject enemy = Instantiate(catSpawner.enemyPrefab, catSpawner.enemyPos.position, catSpawner.enemyPos.rotation);
+            Instantiate(enemyPrefab, deadCatPos.position, deadCatPos.rotation);
             catHit = true;
 
 

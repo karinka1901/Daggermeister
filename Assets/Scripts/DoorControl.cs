@@ -8,11 +8,13 @@ public class DoorControl : MonoBehaviour
     private Animator anim;
     public bool newlevel;
     GameManager gameManager;
+    SFXcontrol audioManager;
     [SerializeField]private PlayerControl playerControl;
 
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        audioManager = GameObject.FindGameObjectWithTag("Music").GetComponent<SFXcontrol>();
         anim = GetComponent<Animator>();
         
     }
@@ -34,6 +36,7 @@ public class DoorControl : MonoBehaviour
             if (playerControl.collectedGems == 6)
             {       
                 Invoke("NewScene", 0.3f);
+          //      audioManager.PlaySFX(audioManager.door);//////////////////////////////////SFX//////////
                 //newlevel = true;
             }
             else

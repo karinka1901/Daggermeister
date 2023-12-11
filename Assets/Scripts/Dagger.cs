@@ -14,12 +14,14 @@ public class Dagger : MonoBehaviour
     private Animator enemyAnim;
     public bool deactivated;
     [SerializeField]private PlayerAttack playerAttack;
+    SFXcontrol audioManager;
 
 
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+        audioManager =  GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
 
     }
 
@@ -51,6 +53,10 @@ public class Dagger : MonoBehaviour
         else
         {
             hit = true;
+           
+            
+            audioManager.PlaySFX(audioManager.daggerHit);//////////////////////////////////SFX//////////
+            
             boxCollider.enabled = false;
             anim.SetTrigger("Explode");
         }

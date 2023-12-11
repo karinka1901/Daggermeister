@@ -24,6 +24,21 @@ TagManager:
   - AntiSpike
   - EnemyArea
   - ShieldTrigger
+  - Music
+  - SFX
+  - Trap
+  - SettingsMenu
+  - Tutorial
+  - JumpT
+  - DJumpT
+  - GemT
+  - SpikesT
+  - TeleportT
+  - walljumpT
+  - 1
+  - 2
+  - 3
+  - 4
   layers:
   - Default
   - TransparentFX

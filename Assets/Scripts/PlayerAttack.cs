@@ -11,12 +11,15 @@ public class PlayerAttack : MonoBehaviour
     public Animator playerAnim;
     [SerializeField] private Animator daggerAnim;
     [SerializeField] private bool isTeleporting;
+    SFXcontrol audioManager;
+    GameManager gameManager;
 
     private void Awake()
     {
         playerAnim = GetComponent<Animator>();
         player = GetComponent<PlayerControl>();
-        
+        audioManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
@@ -36,11 +39,14 @@ public class PlayerAttack : MonoBehaviour
                     if (activeDagger)
                     {
                         TeleportToDagger();
+                        
+
 
                     }
                     else
                     {
                         playerAnim.SetTrigger("Throw");
+                       audioManager.PlaySFX(audioManager.daggerThrow);//////////////////////////////////SFX//////////
 
 
                     }
@@ -56,7 +62,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void StartAttack() //animation event
     {
-        Attack();
+        if (!gameManager.pauseOn)
+        {
+            Attack();
+            audioManager.PlaySFX(audioManager.daggerTeleport);//////////////////////////////////SFX//////////
+        }
     }
 
     private void Attack()
@@ -82,6 +92,7 @@ public class PlayerAttack : MonoBehaviour
             playerAnim.SetTrigger("teleport");
             activeDagger = false;
             isTeleporting = true;
+           audioManager.PlaySFX(audioManager.daggerTeleport);//////////////////////////////////SFX//////////
         }
     }
 

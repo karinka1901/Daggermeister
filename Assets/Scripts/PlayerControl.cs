@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.Tilemaps;
+
 using UnityEngine.SceneManagement;
-using System.Runtime.CompilerServices;
+
 
 public class PlayerControl : MonoBehaviour
 {
@@ -12,12 +11,19 @@ public class PlayerControl : MonoBehaviour
     public bool godMode;
     public bool activated;
     public bool pauseOn;
-    public ParticleSystem skull;
+    public ParticleSystem ghost;
     public int unlockedLevels = 0;
+    public bool isTrapped;
+    public bool end;
+
+    SFXcontrol sfx;
+
+    public GameObject[] tutorialText;
+    public GameObject[] introText;
 
 
 
-    
+
     [Header("Components")]
     public Rigidbody2D rb;
     private Animator animator;
@@ -27,7 +33,7 @@ public class PlayerControl : MonoBehaviour
     public bool isFacingRight = true;
     private float horizontalInput;
     [SerializeField] private float speed = 1f;
-    private bool isDead;
+    public bool isDead;
 
 
     [Header("Jump")]
@@ -68,11 +74,19 @@ public class PlayerControl : MonoBehaviour
 
     private void Start()
     {
+        //audioManager =Find
         playerBox = GetComponent<CapsuleCollider2D>();
         gameManager = FindObjectOfType<GameManager>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        WaterHelmet.SetActive(false);
+        GameObject musicObject = GameObject.FindGameObjectWithTag("SFX");
+        if (musicObject != null)
+        {
+            sfx = musicObject.GetComponent<SFXcontrol>();
+        }
+
+
+            WaterHelmet.SetActive(false);
 
         isDead = false;
 
@@ -138,6 +152,11 @@ public class PlayerControl : MonoBehaviour
         }
         
 
+        if(collectedGems == 6)
+        {
+         //   audioManager.PlaySFX(audioManager.openDoor);//////////////////////////////////SFX//////////
+        }
+
 
     }
 
@@ -156,26 +175,52 @@ public class PlayerControl : MonoBehaviour
     private void Move()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
+       
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+  
+        if (Mathf.Abs(horizontalInput) > 0f)
+        {
+            
+            if (!sfx.isSFXPlaying)
+            {
+                sfx.PlaySFX(sfx.walk);//////////////////////////////////SFX//////////
+            }
+
+        
+            rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        }
+        else
+        {
+            
+            sfx.StopSFX();
+        }
+
     }
+
+
 
 
     private void Jump()
     {
-
+        
         if (Input.GetButtonDown("Jump"))
         {
             isJumping = true;
+            
             if (isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+              
+                sfx.PlaySFX(sfx.jump);//////////////////////////////////SFX//////////
+                
                 jumpsLeft --;
                 //isJumping = true;
             }
             ///////////////////// double jump///////////////////////
             if (!isGrounded && jumpsLeft > 0 && !isSliding)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce - 0.3f); //- 0.3f
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce - 0.3f);
+                sfx.PlaySFX(sfx.jump);//////////////////////////////////SFX//////////
                 jumpsLeft--;
                 Debug.Log("second jump");
             }
@@ -185,6 +230,9 @@ public class PlayerControl : MonoBehaviour
                 Invoke("StopWallJump", wallJumpDuration);
                 jumpsLeft = maxJumps;
                 Debug.Log("im slifdin");
+
+                sfx.PlaySFX(sfx.sliding);//////////////////////////////////SFX//////////
+                
             }
 
         }
@@ -196,6 +244,9 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = new Vector2(-horizontalInput * wallJumpForce.x, wallJumpForce.y);
             jumpsLeft = maxJumps;
             Debug.Log("jumpig off the wale" + jumpsLeft);
+          
+           sfx.PlaySFX(sfx.wallJump);//////////////////////////////////SFX//////////
+            
         }
     }
 
@@ -221,6 +272,7 @@ public class PlayerControl : MonoBehaviour
         if (isSliding)
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+           
         }
     }
 
@@ -237,23 +289,38 @@ public class PlayerControl : MonoBehaviour
             animator.SetBool("isFalling", false);
         }
 
+        if(collision.tag == "Trap")
+        {
+            speed = 0;
+            jumpForce = 0;
+            animator.SetBool("FinalDeath", true);
+            end = true;
+            Destroy(collision.gameObject);
+            isTrapped = true;
+
+        }
+
         if (collision.tag == "Enemy" || (collision.tag == "Spikes" && !antiSpikeOn) || (collision.tag == "DeadlyLiquid" &&  !surviveWater))
         {
+      
+            sfx.PlaySFX(sfx.death);//////////////////////////////////SFX//////////
+            
             if (!godMode)
             {
                
-                animator.SetTrigger("dead");
-                isDead = true;
+            animator.SetTrigger("dead");
+            isDead = true;
                 
                 
-                Debug.Log(collision.tag);
+            Debug.Log(collision.tag);
                 
-            }
+            }       
         }
  
 
         if (collision.tag == "Water")
         {
+          sfx.PlaySFX(sfx.waterSplash);//////////////////////////////////SFX//////////
             rb.drag = newDrag;
             rb.gravityScale *= newGravity;
             speed = 0.8f;
@@ -265,19 +332,24 @@ public class PlayerControl : MonoBehaviour
             activeQuest = true;
         }
 
-        //Collectibles 
+        ///////////////////////////////////Collectibles //////////////////////////////////////////////////////////////
 
         if (collision.tag == "Boost")
         {
             surviveWater = true;
             WaterHelmet.SetActive(true);
             Destroy(collision.gameObject);
+
+          sfx.PlaySFX(sfx.collectedGem);//////////////////////////////////SFX//////////
+            
         }
         if ((collision.tag == "Item"))
         {
             collectedItem = 1;
             Debug.Log("collected item");
             Destroy(collision.gameObject);
+
+          sfx.PlaySFX(sfx.collectedGem);//////////////////////////////////SFX//////////
         }
 
         if (collision.tag == "AntiSpike")
@@ -285,6 +357,59 @@ public class PlayerControl : MonoBehaviour
             antiSpikeOn = true;
             Debug.Log(antiSpikeOn);
             Destroy(collision.gameObject);
+
+           sfx.PlaySFX(sfx.collectedGem);//////////////////////////////////SFX//////////
+        }
+
+
+    /////////////////////////////////////TUTORIAL////////////////////////////////////////////
+
+    if (collision.tag == "JumpT")
+        {
+            tutorialText[0].SetActive(true);
+        }
+    if (collision.tag == "DJumpT")
+    {
+        tutorialText[1].SetActive(true);
+    }
+
+    if (collision.tag == "GemT")
+    {
+        tutorialText[4].SetActive(true);
+    }
+
+    if (collision.tag == "SpikesT")
+    {
+        tutorialText[5].SetActive(true);
+    }
+
+    if (collision.tag == "TeleportT")
+    {
+        tutorialText[2].SetActive(true);
+    }
+
+    if (collision.tag == "walljumpT")
+    {
+        tutorialText[3].SetActive(true);
+    }
+
+        //////////////////////////////////////INTRO//////////////////////////////////////////
+        ///
+        if (collision.tag == "1")
+        {
+            introText[0].SetActive(true);
+        }
+        if (collision.tag == "2")
+        {
+            introText[1].SetActive(true);
+        }
+        if (collision.tag == "3")
+        {
+            introText[2].SetActive(true);
+        }
+        if (collision.tag == "4")
+        {
+            introText[3].SetActive(true);
         }
 
 
@@ -301,6 +426,55 @@ public class PlayerControl : MonoBehaviour
             rb.drag = 0;
             rb.gravityScale = 1;
             speed = 1;
+         sfx.PlaySFX(sfx.waterSplash);//////////////////////////////////SFX//////////
+        }
+////////////////////////////////////////////////TUTORIAl//////////////////////////////////////////////
+        if (collision.tag == "JumpT")
+        {
+            tutorialText[0].SetActive(false);
+        }
+        if (collision.tag == "DJumpT")
+        {
+            tutorialText[1].SetActive(false);
+        }
+
+        if (collision.tag == "GemT")
+        {
+            tutorialText[4].SetActive(false);
+        }
+
+        if (collision.tag == "SpikesT")
+        {
+            tutorialText[5].SetActive(false);
+        }
+
+        if (collision.tag == "TeleportT")
+        {
+            tutorialText[2].SetActive(false);
+        }
+
+        if (collision.tag == "walljumpT")
+        {
+            tutorialText[3].SetActive(false);
+        }
+
+        //////////////////////////////////////INTRO//////////////////////////////////////////
+        ///
+        if (collision.tag == "1")
+        {
+            introText[0].SetActive(false);
+        }
+        if (collision.tag == "2")
+        {
+            introText[1].SetActive(false);
+        }
+        if (collision.tag == "3")
+        {
+            introText[2].SetActive(false);
+        }
+        if (collision.tag == "4")
+        {
+            introText[3].SetActive(false);
         }
     }
 
@@ -364,12 +538,15 @@ public class PlayerControl : MonoBehaviour
         SceneManager.LoadScene(currentSceneName);
     }
 
-
+    public void FinalScwene()
+    {
+        SceneManager.LoadScene(8);
+    }
 
 
     public void DeathScreen()
     {
-        skull.Play();
+        ghost.Play();
     }
 
     public void Dead()

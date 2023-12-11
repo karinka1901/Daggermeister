@@ -6,9 +6,11 @@ public class FallingBlocks : MonoBehaviour
 {
     Rigidbody2D fallingBlockRB;
     public float fallingBlockSpeed = 0.5f;
+    SFXcontrol audioManager;
     void Start()
     {
         fallingBlockRB = GetComponent<Rigidbody2D>();
+        audioManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
     }
 
     void Update()
@@ -20,7 +22,10 @@ public class FallingBlocks : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+           // audioManager.PlaySFX(audioManager.fallingBlock);
             fallingBlockRB.gravityScale = 1;
+            //////////////////////////////////SFX//////////
+
             //fallingBlockRB.velocity = new Vector2(0, 0);
         }
     }

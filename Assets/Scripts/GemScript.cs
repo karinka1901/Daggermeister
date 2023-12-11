@@ -6,9 +6,11 @@ public class GemScript : MonoBehaviour
 {
     //private int gems = 0;
     private PlayerControl playerControl;
+    SFXcontrol audioManager;
     void Start()
     {
         playerControl = FindObjectOfType<PlayerControl>();
+        audioManager =GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
        // playerControl.collectedGems = 0;
     }
 
@@ -18,11 +20,14 @@ public class GemScript : MonoBehaviour
 
             playerControl.collectedGems += 1;
             Debug.Log("gems " +  playerControl.collectedGems);
+            audioManager.PlaySFX(audioManager.collectedGem);//////////////////////////////////SFX//////////
             Destroy(this.gameObject);
 
         }
 
 
+
+
     }
-    
+
 }

@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security;
+
 using UnityEngine;
 
 public class SkeletonEnemy : MonoBehaviour
@@ -9,6 +7,7 @@ public class SkeletonEnemy : MonoBehaviour
     private BoxCollider2D skeletonCollider;
     private Animator skeletonAnim;
     private PlayerControl player;
+    SFXcontrol sfx;
 
     [SerializeField] private GameObject Shield;
     [SerializeField] private GameObject Sword;
@@ -39,6 +38,7 @@ public class SkeletonEnemy : MonoBehaviour
         skeletonCollider = GetComponent<BoxCollider2D>();
         skeletonRb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerControl>();
+        sfx = GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
 
         Sword.SetActive(false);
 
@@ -96,12 +96,14 @@ public class SkeletonEnemy : MonoBehaviour
             if (skeletonLife > 0 && !isShielded)
             {
                 skeletonAnim.SetTrigger("Hit");
+              //  audioManager.PlaySFX(audioManager.skeletonHit);//////////////////////////////////SFX//////////
                 skeletonLife--;
             }
 
             if (skeletonLife == 0)
             {
                 //skeletonAnim.SetBool("Dead", true);
+             sfx.PlaySFX(sfx.skeletonDeath);//////////////////////////////////SFX//////////
                 skeletonAnim.SetTrigger("dead");
                 skeletonSpeed = 0;
                 deadSkeletonPos = transform;
@@ -137,6 +139,7 @@ public class SkeletonEnemy : MonoBehaviour
         // Check if raycast hits the player in front
         if (hitFront.collider != null  && !isAttacking)
         {
+          sfx.PlaySFX(sfx.skeleton);//////////////////////////////////SFX//////////
             Vector2 direction = (player.transform.position - transform.position).normalized;
             skeletonRb.velocity = direction * skeletonSpeed;
         }
