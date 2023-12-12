@@ -619,6 +619,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeProtector
       objectReference: {fileID: 0}
+    - target: {fileID: 3050425095075937599, guid: ab1193df2b7f7b345ac822adc04e9a3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8367772859235681045, guid: ab1193df2b7f7b345ac822adc04e9a3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.03

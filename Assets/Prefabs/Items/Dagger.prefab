@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6107510244150303604}
   - component: {fileID: 5400088153495537942}
   - component: {fileID: 6161817830466893204}
-  - component: {fileID: 5090368333307778044}
+  - component: {fileID: 2907601359241160901}
   m_Layer: 0
   m_Name: Dagger
   m_TagString: Dagger
@@ -176,7 +176,7 @@ MonoBehaviour:
   daggerSpeed: 2.5
   deactivated: 0
   playerAttack: {fileID: 0}
---- !u!95 &5090368333307778044
+--- !u!95 &2907601359241160901
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

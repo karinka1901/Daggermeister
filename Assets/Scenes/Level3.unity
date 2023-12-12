@@ -70124,7 +70124,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &348357264 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 5090368333307778044, guid: f78ccfbeb0f617a4fab5c376a0b15d3b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2907601359241160901, guid: f78ccfbeb0f617a4fab5c376a0b15d3b, type: 3}
   m_PrefabInstance: {fileID: 348357262}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &359704098
