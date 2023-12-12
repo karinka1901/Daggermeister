@@ -1,11 +1,11 @@
-
 using UnityEngine;
-
 using UnityEngine.SceneManagement;
 
 
 public class PlayerControl : MonoBehaviour
 {
+
+    [SerializeField] private GameObject spikeProtector;
     private GameManager gameManager;
     //public int playerDeathCounter = 0;
     public bool godMode;
@@ -22,11 +22,9 @@ public class PlayerControl : MonoBehaviour
     public GameObject[] introText;
 
 
-
-
     [Header("Components")]
     public Rigidbody2D rb;
-    private Animator animator;
+    [HideInInspector]public Animator animator;
     private CapsuleCollider2D playerBox;
 
     [Header("Movement")]
@@ -86,7 +84,8 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-            WaterHelmet.SetActive(false);
+        WaterHelmet.SetActive(false);
+        spikeProtector.SetActive(false);
 
         isDead = false;
 
@@ -125,6 +124,8 @@ public class PlayerControl : MonoBehaviour
                 WaterHelmet.SetActive(!WaterHelmet.activeSelf);
                 surviveWater = !surviveWater;
             }
+
+
 
             Animate();
 
@@ -355,6 +356,7 @@ public class PlayerControl : MonoBehaviour
         if (collision.tag == "AntiSpike")
         {
             antiSpikeOn = true;
+            spikeProtector.SetActive(true);
             Debug.Log(antiSpikeOn);
             Destroy(collision.gameObject);
 

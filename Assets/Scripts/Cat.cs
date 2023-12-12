@@ -60,7 +60,9 @@ public class Cat : MonoBehaviour
 
         if (collision.tag == "Dagger")
         {
-           playerControl.isDead = true;
+            audioManager.PlaySFX(audioManager.fall);//////////////////////////////////SFX//////////
+            playerControl.isDead = true;
+            playerControl.animator.SetTrigger("Trapped");
             deadCatPos = transform;
             Destroy(this.gameObject);
             Instantiate(enemyPrefab, deadCatPos.position, deadCatPos.rotation);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -54,8 +52,8 @@ public class Enemy : MonoBehaviour
             enemySpeedX = 0;
             enemySpeedY = 0;
             anim.SetBool("Dead", true);
-           audioManager.PlaySFX(audioManager.enemyDeath);//////////////////////////////////SFX//////////
-                                                           // Debug.Log("enemys dead");
+            audioManager.PlaySFX(audioManager.enemyDeath);//////////////////////////////////SFX//////////
+                                                
             Debug.Log("boost spawned");
             enemyDeadPos = transform;
             

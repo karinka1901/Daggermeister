@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
 {
-
     public Slider musicSlider;
     private float musicVol;
 
@@ -17,15 +16,12 @@ public class VolumeControl : MonoBehaviour
     public GameObject settings;
 
 
-
-
-
     private void Awake()
     {
        
         DontDestroyOnLoad(this);
         musicSlider.value = 0.3f;
-        sfxSlider.value = 0.8f;
+        sfxSlider.value = 0.5f;
     }
     private void Start()
     {
@@ -51,8 +47,6 @@ public class VolumeControl : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 11)
         {
             settings.SetActive(false);
-
-         
         }
         if (SceneManager.GetActiveScene().buildIndex == 11)
         {

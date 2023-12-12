@@ -948,7 +948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
+  m_Color: {r: 0.6144832, g: 0.6215064, b: 0.7264151, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1467,29 +1467,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walk: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
-  jump: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
-  fall: {fileID: 0}
+  jump: {fileID: 8300000, guid: b019757f067dcf74784a448c768cec9a, type: 3}
+  fall: {fileID: 8300000, guid: d90153fb7ae6834458374e64465bf301, type: 3}
   wallJump: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
   sliding: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
   death: {fileID: 8300000, guid: b827ce3b8be1f474781ec119bae2d9bb, type: 3}
   collectedGem: {fileID: 8300000, guid: 8eab3f671a03a04468d542ee88d389ab, type: 3}
   daggerThrow: {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
-  daggerHit: {fileID: 8300000, guid: 7c47b20bb9874304a809dc5580d403ba, type: 3}
+  daggerHit: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
   daggerTeleport: {fileID: 8300000, guid: 88b1cbe3caa3fee4b8b103b5edd7aba9, type: 3}
   openDoor: {fileID: 8300000, guid: a8cdc78fee213ff40a07ab8cda9ac443, type: 3}
   door: {fileID: 8300000, guid: 46e1cdd58cffed441a1b3a7039ab8d0f, type: 3}
   enemyDeath: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
   elevator: {fileID: 0}
-  lever: {fileID: 0}
+  lever: {fileID: 8300000, guid: a8cdc78fee213ff40a07ab8cda9ac443, type: 3}
   cat: {fileID: 8300000, guid: d80e5a964eef3b74a9486ea4ad308a57, type: 3}
   waterSplash: {fileID: 8300000, guid: 5c223e2ef19f24142b7528b63c878618, type: 3}
   skeleton: {fileID: 8300000, guid: 4c8a8c310ba6a3f44bc04901df74ccd8, type: 3}
   skletenAttack: {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
   skeletonDeath: {fileID: 8300000, guid: f998404c63c5eb446a6b09e0093275f6, type: 3}
-  skeletonHit: {fileID: 0}
-  fallingBlock: {fileID: 0}
-  lockedLvl: {fileID: 0}
-  buttonPress: {fileID: 0}
+  skeletonHit: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
+  fallingBlock: {fileID: 8300000, guid: 7f42409e2c1f08c4ba897c84f6b04aa1, type: 3}
+  lockedLvl: {fileID: 8300000, guid: b190a8a5f59499f4f9204e64b9a04da9, type: 3}
+  buttonPress: {fileID: 8300000, guid: de256fb612d5b1246bb25cb8de1940d2, type: 3}
   isSFXPlaying: 0
   isMusicPlaying: 0
   SFXSource: {fileID: 1638025165}
@@ -1628,7 +1628,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1113171725625615109, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1247499519499685957, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
       propertyPath: m_Name
@@ -1720,15 +1720,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4305074867041970018, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4585147538034488055, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5682291778315151608, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6771926753153448322, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
       propertyPath: m_Camera
@@ -1737,6 +1737,10 @@ PrefabInstance:
     - target: {fileID: 6771926753153448322, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
       propertyPath: m_RenderMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015104908638919268, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7015104908638919268, guid: c56e3157f81434948ad6819c45456c6a, type: 3}
       propertyPath: m_TagString
@@ -1916,7 +1920,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1856371448}
   menuBackground: {fileID: 8300000, guid: ccad869fad961cf41ab8e4d1be870bc7, type: 3}
-  gameBackground: {fileID: 8300000, guid: 49dd4907cc9be3246a58a9fcdec1440a, type: 3}
+  gameBackground: {fileID: 8300000, guid: 741a07d6afb087d4d847aafa0978801a, type: 3}
+  gameBackgroundTwo: {fileID: 8300000, guid: 593a72e100a129545bb4ac86b3b92883, type: 3}
+  gameBackgroundThree: {fileID: 8300000, guid: 49dd4907cc9be3246a58a9fcdec1440a, type: 3}
+  lastScene: {fileID: 8300000, guid: d0521d72fde0b514496092039cf266c4, type: 3}
 --- !u!4 &1856371450
 Transform:
   m_ObjectHideFlags: 0
@@ -1985,7 +1992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7327044, g: 0.75326556, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

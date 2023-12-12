@@ -18,7 +18,7 @@ public class Elevator: MonoBehaviour
 
         playerPlaceholder = new GameObject("TempPLayerPos").transform;
         playerPlaceholder.parent = transform;
-        playerPlaceholder.gameObject.SetActive(false); // Initially deactivate the placeholder
+        playerPlaceholder.gameObject.SetActive(false); 
     }
 
     void Update()
@@ -44,11 +44,6 @@ public class Elevator: MonoBehaviour
         {
             movingToEnd = !movingToEnd;
         }
-        //if (playerOnPlatform)
-        //{
-        //    player.rb.velocity = Vector2.right * speed;
-        //}
-
 
     }
 
@@ -72,22 +67,6 @@ public class Elevator: MonoBehaviour
             playerPlaceholder.gameObject.SetActive(false);
         }
     }
-
-
-    //        //If this moves vertically
-    //        if (!isHorizontal)
-    //        {
-    //            //moving up
-    //            if (isMovingUp && !hitTrigger)
-    //            {
-    //                rb.velocity = Vector2.up* speed;
-    //}
-
-    ////moving down
-    //if (!isMovingUp && !hitTrigger)
-    //{
-    //    rb.velocity = Vector2.down * speed;
-    //}
 }
 
 

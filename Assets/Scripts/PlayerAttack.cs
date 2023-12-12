@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 
@@ -39,16 +38,11 @@ public class PlayerAttack : MonoBehaviour
                     if (activeDagger)
                     {
                         TeleportToDagger();
-                        
-
-
                     }
                     else
                     {
                         playerAnim.SetTrigger("Throw");
                        audioManager.PlaySFX(audioManager.daggerThrow);//////////////////////////////////SFX//////////
-
-
                     }
 
                 }
@@ -62,10 +56,14 @@ public class PlayerAttack : MonoBehaviour
 
     private void StartAttack() //animation event
     {
-        if (!gameManager.pauseOn)
+        if (!gameManager.pauseOn && !player.isDead)
         {
             Attack();
             audioManager.PlaySFX(audioManager.daggerTeleport);//////////////////////////////////SFX//////////
+        }
+        else
+        {
+            Debug.Log("cant Attack");
         }
     }
 

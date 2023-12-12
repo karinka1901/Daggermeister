@@ -22,9 +22,9 @@ public class FallingBlocks : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-           // audioManager.PlaySFX(audioManager.fallingBlock);
-            fallingBlockRB.gravityScale = 1;
-            //////////////////////////////////SFX//////////
+           audioManager.PlaySFX(audioManager.fallingBlock);//////////////////////////////////SFX//////////
+           fallingBlockRB.gravityScale = 1;
+            
 
             //fallingBlockRB.velocity = new Vector2(0, 0);
         }

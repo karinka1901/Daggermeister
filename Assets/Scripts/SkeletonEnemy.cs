@@ -96,13 +96,13 @@ public class SkeletonEnemy : MonoBehaviour
             if (skeletonLife > 0 && !isShielded)
             {
                 skeletonAnim.SetTrigger("Hit");
-              //  audioManager.PlaySFX(audioManager.skeletonHit);//////////////////////////////////SFX//////////
+             sfx.PlaySFX(sfx.skeletonHit);//////////////////////////////////SFX//////////
                 skeletonLife--;
             }
 
             if (skeletonLife == 0)
             {
-                //skeletonAnim.SetBool("Dead", true);
+                skeletonAnim.SetBool("Dead", true);
              sfx.PlaySFX(sfx.skeletonDeath);//////////////////////////////////SFX//////////
                 skeletonAnim.SetTrigger("dead");
                 skeletonSpeed = 0;
@@ -136,10 +136,10 @@ public class SkeletonEnemy : MonoBehaviour
         Debug.DrawRay(attackOrigin.position, Vector2.right * transform.localScale.x * attackRay, Color.green);
 
 
-        // Check if raycast hits the player in front
+
         if (hitFront.collider != null  && !isAttacking)
         {
-          sfx.PlaySFX(sfx.skeleton);//////////////////////////////////SFX//////////
+            sfx.PlaySFX(sfx.skeleton);//////////////////////////////////SFX//////////
             Vector2 direction = (player.transform.position - transform.position).normalized;
             skeletonRb.velocity = direction * skeletonSpeed;
         }

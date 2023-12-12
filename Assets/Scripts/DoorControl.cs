@@ -8,13 +8,13 @@ public class DoorControl : MonoBehaviour
     private Animator anim;
     public bool newlevel;
     GameManager gameManager;
-    SFXcontrol audioManager;
+    SFXcontrol sfx;
     [SerializeField]private PlayerControl playerControl;
 
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        audioManager = GameObject.FindGameObjectWithTag("Music").GetComponent<SFXcontrol>();
+        sfx = GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
         anim = GetComponent<Animator>();
         
     }
@@ -36,7 +36,7 @@ public class DoorControl : MonoBehaviour
             if (playerControl.collectedGems == 6)
             {       
                 Invoke("NewScene", 0.3f);
-          //      audioManager.PlaySFX(audioManager.door);//////////////////////////////////SFX//////////
+                sfx.PlaySFX(sfx.door);//////////////////////////////////SFX//////////
                 //newlevel = true;
             }
             else
@@ -56,8 +56,8 @@ public class DoorControl : MonoBehaviour
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         gameManager.UpdateTimer(SceneManager.GetActiveScene().buildIndex, gameManager.secretTimer); // gets the current time for specific level
-       
-        
+        Debug.Log(SceneManager.GetActiveScene().buildIndex + "     " + gameManager.secretTimer);
+
         Debug.Log(SceneManager.GetActiveScene().buildIndex + "     " + gameManager.getDeathCount());
         gameManager.UpdateDeath(SceneManager.GetActiveScene().buildIndex, gameManager.getDeathCount()); //gets the current death number for the specific level
         gameManager.ResetDeathCount();

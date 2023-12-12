@@ -8,10 +8,13 @@ public class Lever : MonoBehaviour
     private GameObject leverUp;
     private GameObject leverDown;
     private GameObject blockCrate;
+    SFXcontrol sfx;
 
 
     void Start()
     {
+        sfx = GameObject.FindGameObjectWithTag("SFX").GetComponent<SFXcontrol>();
+
         leverUp = transform.Find("Up").gameObject;
         leverDown = transform.Find("Down").gameObject;
         blockCrate = transform.Find("Block").gameObject;
@@ -31,6 +34,7 @@ public class Lever : MonoBehaviour
     {
         if (collision.tag == "Player") 
         {
+            sfx.PlaySFX(sfx.lever);//////////////////////////////////SFX//////////
             elevator.elevatorOn = true;
             leverUp.SetActive(false);
             leverDown.SetActive(true);
