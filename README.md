@@ -1,6 +1,6 @@
 ![image](https://github.com/karinka1901/Daggermeister/assets/60856417/e84110c2-8c0b-405a-afdb-439f72984583)
 
-# DAGGERMEISTER
+
 
 Daggermeister is a 2D platformer that combines precision dagger-throwing and teleportation. The goal is to collect 6 blue gems in orfder to unlock the next level. The game is heavily inspired by “Daggerhood”. 
 It was made in Unity as a part of a school project.
