@@ -82,13 +82,13 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Tab) && !mainMenuOn)
+        if (Input.GetKeyDown(KeyCode.Escape) && !mainMenuOn)
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
             pauseOn = !pauseOn;
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab) && SceneManager.GetActiveScene().name == "LevelSelect" || Input.GetKeyDown(KeyCode.Tab) && SceneManager.GetActiveScene().name == "SettingsMenu")
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "LevelSelect" || Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "SettingsMenu")
         {
             SceneManager.LoadScene("Start");
          
