@@ -1,3 +1,8 @@
+![Unity](https://img.shields.io/badge/Unity-000000?logo=unity&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-239120?logo=csharp&logoColor=white)
+[![Download from Itch.io](https://img.shields.io/badge/Play%20on%20Itch.io-FF69B4?logo=itch.io&logoColor=white)](https://karinka1901.itch.io/daggermeister)
+[![Watch on YouTube](https://img.shields.io/badge/Watch%20on-YouTube-FF0000?logo=youtube&logoColor=white)](https://youtu.be/RFExoLWc8Ec)
+
 ![image](https://github.com/karinka1901/Daggermeister/assets/60856417/e84110c2-8c0b-405a-afdb-439f72984583)
 
 
@@ -9,9 +14,9 @@ It was made in Unity as a part of a school project.
 ## Demo
 
 
-https://karinka1901.itch.io/daggermeister
+[Itch.io](https://karinka1901.itch.io/daggermeister)
 
-https://youtu.be/RFExoLWc8Ec
+[Youtube](https://youtu.be/RFExoLWc8Ec)
 
 ## GAME OVERVIEW
 ![image](https://github.com/karinka1901/PortfolioProject/assets/60856417/8e0fb92b-36b4-4684-b680-5e222e0c182d)
