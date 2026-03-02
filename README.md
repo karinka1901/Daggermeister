@@ -24,3 +24,6 @@ It was made in Unity as a part of a school project.
 ![image](https://github.com/karinka1901/PortfolioProject/assets/60856417/89381a0d-a4bf-49a9-93c1-d94a00eff6bd)
 ![image](https://github.com/karinka1901/PortfolioProject/assets/60856417/88228667-14e5-4daf-801f-33fcc4db7991)
 ![image](https://github.com/karinka1901/PortfolioProject/assets/60856417/d0b69b33-08d1-4b07-9bd5-d78a48d5bec4)
+<img width="1129" height="614" alt="image" src="https://github.com/user-attachments/assets/2ce074fc-5979-4da9-b1b2-54ec27932851" />
+
+
